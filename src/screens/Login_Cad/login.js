@@ -6,16 +6,16 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 // import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 
-const mockApiPost = async (url, data) => {
-  // Simula o comportamento da API com base no valor de `data`
-  if (data.usuario === 'Teste' && data.senha === '123') {
-    return { data: { success: true } }; // Mock de resposta de sucesso
-  } else if (data.usuario === 'usuario_teste' && data.senha === 'senha_errada') {
-    return { data: { success: false } }; // Mock de falha de autenticação
-  } else {
-    throw new Error('Erro de rede'); // Mock de erro de rede
-  }
-};
+// const mockApiPost = async (url, data) => {
+//   // Simula o comportamento da API com base no valor de `data`
+//   if (data.usuario === 'Teste' && data.senha === '123') {
+//     return { data: { success: true } }; // Mock de resposta de sucesso
+//   } else if (data.usuario === 'usuario_teste' && data.senha === 'senha_errada') {
+//     return { data: { success: false } }; // Mock de falha de autenticação
+//   } else {
+//     throw new Error('Erro de rede'); // Mock de erro de rede
+//   }
+// };
 
 const Login = ({ onLoginSuccess }) => {
   const navigation = useNavigation();
@@ -26,15 +26,13 @@ const Login = ({ onLoginSuccess }) => {
 
   async function handleLogin() {
     try {
-      // Substitua a chamada original pela função mock
-      const response = await mockApiPost('/usuarios/login', { usuario, senha });
+      const response = await api.post('/usuarios/login', {
+        usuario,
+        senha
+      });
 
-      if (response.data.success) {
+      if (response.data.success) { // Ajuste conforme o retorno de sucesso da sua API
         onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
-        navigation.reset({
-          index:0,
-          routes: [{name: 'App'}]
-        })
       } else {
         Alert.alert('Erro', 'Usuário ou senha inválidos.');
       }
@@ -45,13 +43,15 @@ const Login = ({ onLoginSuccess }) => {
   }
   // async function handleLogin() {
   //   try {
-  //     const response = await api.post('/usuarios/login', {
-  //       usuario,
-  //       senha
-  //     });
+  //     // Substitua a chamada original pela função mock
+  //     const response = await mockApiPost('/usuarios/login', { usuario, senha });
 
-  //     if (response.data.success) { // Ajuste conforme o retorno de sucesso da sua API
+  //     if (response.data.success) {
   //       onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
+  //       navigation.reset({
+  //         index:0,
+  //         routes: [{name: 'App'}]
+  //       })
   //     } else {
   //       Alert.alert('Erro', 'Usuário ou senha inválidos.');
   //     }
