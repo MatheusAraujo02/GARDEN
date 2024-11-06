@@ -5,20 +5,12 @@ import MyButton from '../../components/button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../../contexts/userContext';
 
-// const mockApiPost = async (url, data) => {
-//   // Simula o comportamento da API com base no valor de `data`
-//   if (data.usuario === 'Teste' && data.senha === '123') {
-//     return { data: { success: true } }; // Mock de resposta de sucesso
-//   } else if (data.usuario === 'usuario_teste' && data.senha === 'senha_errada') {
-//     return { data: { success: false } }; // Mock de falha de autenticação
-//   } else {
-//     throw new Error('Erro de rede'); // Mock de erro de rede
-//   }
-// };
-
-const Login = ({ onLoginSuccess }) => {
+const Login = () => { // { onLoginSuccess }
   const navigation = useNavigation();
+
+  const { login } = useAuth();
 
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
@@ -27,12 +19,20 @@ const Login = ({ onLoginSuccess }) => {
   async function handleLogin() {
     try {
       const response = await api.post('/usuarios/login', {
-        usuario,
-        senha
+        usu_email: usuario,
+        usu_senha: senha
       });
 
       if (response.data.success) { // Ajuste conforme o retorno de sucesso da sua API
-        onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
+        // onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
+        const pacienteInfo = {
+          pac_id: response.data.pac_id,
+          usu_id: response.data.usu_id,
+          usu_nome: response.data.usu_nome
+        };
+
+        await login(pacienteInfo);
+
         navigation.reset({
           index:0,
           routes: [{name: 'App'}]
@@ -40,30 +40,16 @@ const Login = ({ onLoginSuccess }) => {
       } else {
         Alert.alert('Erro', 'Usuário ou senha inválidos.');
       }
-    } catch (error) {
-      console.log(error);
-      Alert.alert('Erro', 'Não foi possível realizar o login.');
-    }
+      } catch (error) {
+        console.log("Erro no login:", error);
+        const errorMessage = error.response?.data?.mensagem || "Não foi possível realizar o login.";
+        Alert.alert('Erro', errorMessage);
+      }     
+    // } catch (error) {
+    //   console.log(error);
+    //   Alert.alert('Erro', 'Não foi possível realizar o login.');
+    // }
   }
-  // async function handleLogin() {
-  //   try {
-  //     // Substitua a chamada original pela função mock
-  //     const response = await mockApiPost('/usuarios/login', { usuario, senha });
-
-  //     if (response.data.success) {
-  //       onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
-  //       navigation.reset({
-  //         index:0,
-  //         routes: [{name: 'App'}]
-  //       })
-  //     } else {
-  //       Alert.alert('Erro', 'Usuário ou senha inválidos.');
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     Alert.alert('Erro', 'Não foi possível realizar o login.');
-  //   }
-  // }
 
   return (
     <View> 
