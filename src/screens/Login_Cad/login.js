@@ -3,7 +3,7 @@ import { TextInput, Text, View, ImageBackground, TouchableOpacity, StatusBar, Pr
 import styles from './login_styles';
 import MyButton from '../../components/button';
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import api from '../../services/api';
+import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 
 // const mockApiPost = async (url, data) => {
@@ -33,6 +33,10 @@ const Login = ({ onLoginSuccess }) => {
 
       if (response.data.success) { // Ajuste conforme o retorno de sucesso da sua API
         onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
+        navigation.reset({
+          index:0,
+          routes: [{name: 'App'}]
+        })
       } else {
         Alert.alert('Erro', 'Usuário ou senha inválidos.');
       }
