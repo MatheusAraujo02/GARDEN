@@ -27,18 +27,18 @@ export default function Atividades() {
     // const { inicializarAtividades } = useAtividades();
 
     useEffect(() => {
-      async function AtividadeMock(){
+      async function Atividades(){
         try {
           const response = await api.get("/atividade");
 
           setAtividades(response.data.dados);
-          inicializarAtividades(response.data.dados);
+          // inicializarAtividades(response.data.dados);
         } catch (error) {
           console.error("erro ao buscar atividade:", error);
           setAtividades([]);
         }
       }
-        AtividadeMock();
+        Atividades();
     }, []);
     
       return(

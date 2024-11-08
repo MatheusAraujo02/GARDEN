@@ -7,7 +7,7 @@ import api from '../../services/api';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../../contexts/userContext';
 
-const Login = () => { // { onLoginSuccess }
+const Login = ({onLoginSuccess}) => {
   const navigation = useNavigation();
 
   const { login } = useAuth();
@@ -18,21 +18,20 @@ const Login = () => { // { onLoginSuccess }
 
   async function handleLogin() {
     try {
-      const response = await api.post('/usuarios/login', {
+      const response = await api.post('/usuarios/loginPaciente', {
         usu_email: usuario,
         usu_senha: senha
       });
 
-      if (response.data.success) { // Ajuste conforme o retorno de sucesso da sua API
-        // onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
+      if (response.data.sucesso) { // Ajuste conforme o retorno de sucesso da sua API
+        onLoginSuccess(); // Chama a função para atualizar o estado de autenticação
         const pacienteInfo = {
-          pac_id: response.data.pac_id,
-          usu_id: response.data.usu_id,
-          usu_nome: response.data.usu_nome
+          pac_id: response.data.dados.pac_id,
+          usu_id: response.data.dados.usu_id,
+          usu_nome: response.data.dados.usu_nome
         };
-
+        console.log(usuario, usu_id, usu_nome, pac_id)
         await login(pacienteInfo);
-
         navigation.reset({
           index:0,
           routes: [{name: 'App'}]

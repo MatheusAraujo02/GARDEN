@@ -7,8 +7,9 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     
     const login = async (pacienteInfo) => {
+        
         setUser(pacienteInfo);
-        await AsyncStorage.setItem("user", jSON.stringify(pacienteInfo));
+        await AsyncStorage.setItem("user", JSON.stringify(pacienteInfo));
     };
 
 

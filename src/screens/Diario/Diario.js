@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { View, Text, Pressable, FlatList } from 'react-native'
-// import { LogBox } from 'react-native';
 import api from '../../services/api'
-
-// LogBox.ignoreLogs([ // Usado para tirar o alerta da tela, depois preciso ver se o alerta é verdadeiro ou não ira afetar em nada
-//   'Non-serializable values were found in the navigation state',
-// ]);
+import { useAuth } from '../../../contexts/userContext'
 
 import NoteDetails from './NoteDetails';
 import AddNote from './AddNote';
@@ -32,17 +28,20 @@ export default function Diario() {
 const ListaDeNotas = ({ navigation }) => {
   const [notes, setNotes] = useState([]);
 
-  useEffect(() => {
-    async function Notas() {
-      try {
-        const response = await api.get("/diario/11");
+  const { user } = useAuth();
 
-        setNotes(response.data.dados);
-      } catch (error) {
-        console.error("erro ao buscar notas:", error);
+  useEffect(() => {
+    if (user && user.pac_id){
+      async function Notas() {
+        try {
+          const response = await api.get(`/diario/${user.pac_id}`);
+
+          setNotes(response.data.dados);
+        } catch (error) {
+          console.error("erro ao buscar notas:", error);
+        }
       }
-    }
-    Notas();
+      Notas();}
   })
   return (
     <View style={styles.container}>
