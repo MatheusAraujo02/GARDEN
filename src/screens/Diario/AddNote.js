@@ -1,10 +1,13 @@
-import { useState} from 'react'
+import { useState } from 'react'
 import { View, TextInput, StyleSheet, Pressable, Text, Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { useAuth } from '../../../contexts/userContext';
 
 import api from '../../services/api';
 
 const AddNote = ({ navigation }) => {
   const [newNote, setNewNote] = useState('');
+
+  const { user } = useAuth();
 
   const handleSalvarNota = async () => {
     if (!newNote.trim()) {
@@ -14,7 +17,7 @@ const AddNote = ({ navigation }) => {
 
     try {
       await api.post('/diario', {
-        pac_id: 11,
+        pac_id: user.pac_id,
         dia_relato: newNote,
         dia_data: new Date(),
       });
