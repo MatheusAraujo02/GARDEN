@@ -18,67 +18,85 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
   function Login() {
     const navigation = useNavigation();
-    const { login_paciente, error} = useContext(UserContext)
+    const { loginPaciente, error} = useContext(UserContext);
     
     const [login, setLogin] = useState("");
     const [senha, setSenha] = useState("");
     const [isSenhaVisible, setIsSenhaVisible] = useState(false);
 
     async function handleSubmit() {
-
       if (!login || !senha) {
-        Alert.alert("Por favor, preencha todos os campos.");
-        return;
+          Alert.alert("Por favor, preencha todos os campos.");
+          return;
       }
 
-
-      // await login_paciente();
-
-      const is_loggin = await login_paciente(login, senha); 
+      // Realiza o login com o contexto
+      const isLoggedIn = await loginPaciente(login, senha); 
       
-      if (is_loggin) {
-        navigation.reset({
-                  index:0,
-                  routes: [{name: 'App'}]
-                })
-      }
-
-    async function logar() {
-      try {
-        const dados = {
-          usu_email: login,
-          usu_senha: senha,
-        }
-        const response = await api.post("/usuarios/loginPaciente", dados);
-
-        if (response.data.sucesso === true) {
-          const usuario = response.data.dados;
-          const objLogado = {
-            id: usuario.usu_id,
-            nome: usuario.usu_nome,
-            acesso: usuario.usu_adm,
-          };
-         await AsyncStorage.clear();
-         await AsyncStorage.setItem("user", JSON.stringify(objLogado));
-
+      if (isLoggedIn) {
           navigation.reset({
-            index:0,
-            routes: [{name: 'App'}]
+              index: 0,
+              routes: [{ name: 'App' }]
           });
-        } else {
-          Alert.alert("Erro: " + response.data.mensagem);
-        }
-      } catch (error) {
-        if(error.response) {
-          Alert.alert("Erro", `${error.response.data.mensagem}\n${error.response.data.dados}`);
-        } else {
-          Alert.alert("Erro inesperado. Tente novamente mais tarde.");
-        }
+      } else {
+          Alert.alert("Erro", error || "Falha ao realizar login");
       }
-    }
+  }
+
+    // async function handleSubmit() {
+
+    //   if (!login || !senha) {
+    //     Alert.alert("Por favor, preencha todos os campos.");
+    //     return;
+    //   }
 
 
-    }
+    //   // await login_paciente();
+
+    //   const is_loggedIn = await loginPaciente(login, senha); 
+      
+    //   if (is_loggedIn) {
+    //     navigation.reset({
+    //               index:0,
+    //               routes: [{name: 'App'}]
+    //             })
+    //   }
+
+    // async function logar() {
+    //   try {
+    //     const dados = {
+    //       usu_email: login,
+    //       usu_senha: senha,
+    //     }
+    //     const response = await api.post("/usuarios/loginPaciente", dados);
+
+    //     if (response.data.sucesso === true) {
+    //       const usuario = response.data.dados;
+    //       const objLogado = {
+    //         id: usuario.usu_id,
+    //         nome: usuario.usu_nome,
+    //         acesso: usuario.usu_adm,
+    //       };
+    //      await AsyncStorage.clear();
+    //      await AsyncStorage.setItem("user", JSON.stringify(objLogado));
+
+    //       navigation.reset({
+    //         index:0,
+    //         routes: [{name: 'App'}]
+    //       });
+    //     } else {
+    //       Alert.alert("Erro: " + response.data.mensagem);
+    //     }
+    //   } catch (error) {
+    //     if(error.response) {
+    //       Alert.alert("Erro", `${error.response.data.mensagem}\n${error.response.data.dados}`);
+    //     } else {
+    //       Alert.alert("Erro inesperado. Tente novamente mais tarde.");
+    //     }
+    //   }
+    // }
+
+
     return (
       <View> 
         <StatusBar barStyle="light-content" backgroundColor="#000" translucent={false} />
@@ -104,7 +122,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         </ImageBackground>
       </View>
     );
-  }
+    }
+  
   // async function handleLogin() {
   //   try {
   //     const response = await api.post('/usuarios/loginPaciente', {

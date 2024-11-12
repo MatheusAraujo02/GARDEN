@@ -9,20 +9,19 @@ const UserProvider = ({ children }) => {
     const [error, setError] = useState(null)
 
     const logout = async () => {
-        setUser(null); //Limpa o estado `user`, o que indica que o usuário não está mais autenticado
+        setPacienteInfo(null); //Limpa o estado `user`, o que indica que o usuário não está mais autenticado
         await AsyncStorage.removeItem('user'); // Remove os dados do AsyncStorage para efetuar o logout
     };
 
-    const saveUserAsyncStorage = user => {
-      AsyncStorage.setItem("user", JSON.stringify(user))
+    const saveUserAsyncStorage = async (user) => {
+      await AsyncStorage.setItem("user", JSON.stringify(user))
     }
 
 
   useEffect(() => {
     const getPacInfo = async () => {
       try {
-        const pacInfo = await AsyncStorage.getItem("user");
-        
+        const pacInfo = await AsyncStorage.getItem("user");       
         if (pacInfo) {
           setPacienteInfo(JSON.parse(pacInfo));
         }
@@ -48,8 +47,8 @@ const UserProvider = ({ children }) => {
 
       // const { id: usu_id, psi_id } = JSON.parse(storedUser);
 
-      const usu_id = 5 ;
-      const pac_id = 19;
+      // const usu_id = 5 ;
+      // const pac_id = 19;
       // Faz a requisição com o id do usuário logado
       const usuarioResponse = await api.get(`/usuario/${usu_id}`);
       const pacienteResponse = await api.get(`/paciente/${pac_id}`);
@@ -65,25 +64,63 @@ const UserProvider = ({ children }) => {
     };
 
     const loginPaciente = async (email, password) => {
-        try{
-          const response = await api.post('/usuarios/loginPaciente', {usu,email: email, usu_senha: password});
-          const [pacDados] = response.data.dados;
+      try {
+          const response = await api.post('/usuarios/loginPaciente', {
+              usu_email: email,
+              usu_senha: password
+          });
           
-          setPacienteInfo({
-            pac_id: pacDados.pac_id,
-            usu_id: pacDados.usu_id,
-            usu_nome: pacDados.usu_nome,
-          })
-          setError(null)
-          saveUserAsyncStorage(pacDados)
-          return true
-        } catch(error){
-          setError("login e/ou senha incorretos!")
-          return false
-        }
-      }  
-      // await AsyncStorage.setItem("user", JSON.stringify(pacienteInfo));
-      
+          if (response.data.sucesso) { // Verifica se a resposta indica sucesso
+              const pacDados = response.data.dados[0];
+              
+              setPacienteInfo({
+                  pac_id: pacDados.pac_id,
+                  usu_id: pacDados.usu_id,
+                  usu_nome: pacDados.usu_nome,
+              });
+              
+              setError(null);
+              saveUserAsyncStorage(pacDados);
+              return true;
+          } else {
+              setError(response.data.mensagem || "Erro no login");
+              return false;
+          }
+      } catch (error) {
+          setError("login e/ou senha incorretos!");
+          return false;
+      }
+  };
+  
+
+    // const loginPaciente = async (email, password) => {
+    //     try{
+    //       const response = await api.post('/usuarios/loginPaciente', {
+    //         usu_email: email, 
+    //         usu_senha: password
+    //       });
+    //       if(response.data.sucesso){
+    //       const [pacDados] = response.data.dados[0];
+          
+    //       setPacienteInfo({
+    //         pac_id: pacDados.pac_id,
+    //         usu_id: pacDados.usu_id,
+    //         usu_nome: pacDados.usu_nome,
+    //       });
+
+    //       setError(null);
+    //       saveUserAsyncStorage(pacDados);
+    //       return true;
+    //   } else {
+      //     setError(response.data.mensagem || "Erro no login");
+      //   } catch(error){
+        //     setError("login e/ou senha incorretos!")
+        //     return false
+        //   }
+        // }
+        // await AsyncStorage.setItem("user", JSON.stringify(pacienteInfo));
+        
+        // };
 
 
     return (
