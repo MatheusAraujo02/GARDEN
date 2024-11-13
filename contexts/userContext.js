@@ -70,17 +70,19 @@ const UserProvider = ({ children }) => {
               usu_senha: password
           });
           
-          if (response.data.sucesso) { // Verifica se a resposta indica sucesso
-              const pacDados = response.data.dados[0];
-              
+          if (response.data.sucesso && response.data.dados.length > 0) { // Verifica se a resposta indica sucesso
+              const pacDados = response.data.dados[0];             
               setPacienteInfo({
                   pac_id: pacDados.pac_id,
                   usu_id: pacDados.usu_id,
                   usu_nome: pacDados.usu_nome,
               });
               
+              await saveUserAsyncStorage(pacDados);
+
+              await fetchPacienteInfo();
+              
               setError(null);
-              saveUserAsyncStorage(pacDados);
               return true;
           } else {
               setError(response.data.mensagem || "Erro no login");
