@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, Dimensions, Alert } from 'react-native';
-import { useAuth } from '../../../contexts/userContext';
-
+import { UserContext } from '../../../contexts/userContext';
+import { useContext } from 'react';
 import api from '../../services/api';
 
 export default function Emocao() {
   const [idSelecionado, setIdSelecionado] = useState(null);
 
-  const { user } = useAuth();  
+  const { pacienteInfo } = useContext(UserContext);  
   
   const mostrarEmocaoSelecionada = () => {
     switch (idSelecionado) {
@@ -34,7 +34,7 @@ export default function Emocao() {
         await api.post('/emocao_paciente', {
           emo_id: idSelecionado,
           emo_data: new Date().toISOString().split("T")[0],
-          pac_id: user.pac_id,
+          pac_id: pacienteInfo.pac_id,
         });
         setIdSelecionado(null);
         Alert.alert('Sucesso', 'Emoção salva com sucesso!');

@@ -66,8 +66,10 @@ const UserProvider = ({ children }) => {
     const loginPaciente = async (email, password) => {
       try {
           const response = await api.post('/usuarios/loginPaciente', {
-              usu_email: email,
-              usu_senha: password
+            // usu_email,
+            // usu_senha
+            usu_email: email,
+            usu_senha: password
           });
           
           if (response.data.sucesso && response.data.dados.length > 0) { // Verifica se a resposta indica sucesso
@@ -87,13 +89,21 @@ const UserProvider = ({ children }) => {
           } else {
               setError(response.data.mensagem || "Erro no login");
               return false;
+            }
+          } catch (error) {
+            setError("login e/ou senha incorretos!", error);
+            return false;
           }
-      } catch (error) {
-          setError("login e/ou senha incorretos!");
-          return false;
-      }
-  };
-  
+        };
+        
+        return (
+  <UserContext.Provider value={{ pacienteInfo, fetchPacienteInfo, loginPaciente, error, logout}}>
+      {children}
+  </UserContext.Provider>
+)
+};
+
+export {UserContext, UserProvider}
 
     // const loginPaciente = async (email, password) => {
     //     try{
@@ -124,12 +134,3 @@ const UserProvider = ({ children }) => {
         
         // };
 
-
-    return (
-        <UserContext.Provider value={{ pacienteInfo, loginPaciente, error, logout}}>
-            {children}
-        </UserContext.Provider>
-    )
-};
-
-export {UserContext, UserProvider}

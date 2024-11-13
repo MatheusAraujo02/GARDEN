@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { View, Text, Pressable, FlatList } from 'react-native'
 import api from '../../services/api'
-import { useAuth } from '../../../contexts/userContext'
+import { UserContext } from '../../../contexts/userContext'
+import { useContext } from 'react'
 
 import NoteDetails from './NoteDetails';
 import AddNote from './AddNote';
@@ -28,13 +29,13 @@ export default function Diario() {
 const ListaDeNotas = ({ navigation }) => {
   const [notes, setNotes] = useState([]);
 
-  const { user } = useAuth();
+  const { pacienteInfo } = useContext(UserContext);
 
   useEffect(() => {
-    if (user && user.pac_id){
+    if (pacienteInfo && pacienteInfo.pac_id){
       async function Notas() {
         try {
-          const response = await api.get(`/diario/${user.pac_id}`);
+          const response = await api.get(`/diario/${pacienteInfo.pac_id}`);
 
           setNotes(response.data.dados);
         } catch (error) {

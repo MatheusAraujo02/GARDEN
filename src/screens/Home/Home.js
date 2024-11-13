@@ -55,7 +55,7 @@ export default function Home({ navigation }) {
           <Text style={styles.titleProxSessao}>Proxima sessão</Text>
           <Ionicons name='calendar-outline' style={{ fontSize: 35, color: '#0E920A', position: 'absolute', marginLeft: 25}}/>
           <Text style={ styles.titleData }> {dia} - {hora} </Text>
-          <Text style={ [styles.titleData, { marginLeft: '70%'} ] }> {dataNumero} </Text>
+          <Text style={ [styles.titleData, { marginLeft: '70%'} ] }> {dataNumero} </Text>       
         </View>
     </View>
   );

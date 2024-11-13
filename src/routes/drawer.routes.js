@@ -48,15 +48,14 @@ export default function DrawerRoutes() {
             }}
             
             />
-             {/* <Drawer.Screen
+              {/* <Drawer.Screen
                 name='MeuPerfil'
-                component={MeuPerfil}
+                component={}
                 options={{
                     drawerIcon: ({ focused, size,}) => <Feather name='settings'  color={focused ? 'darkgreen' : 'grey' } size={ size }/>,
                     drawerLabel: 'Meu Perfil',
-            }}
-             */}
-            {/* /> */}
+                }}
+            /> */}
         </Drawer.Navigator>
     )
 }
