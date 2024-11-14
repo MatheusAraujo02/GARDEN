@@ -39,35 +39,34 @@ const UserProvider = ({ children }) => {
     //   if(pacInfo) setPacienteInfo(JSON.parse(pacInfo))
     //   }, [] )
     
-    const fetchPacienteInfo = async () => {
-      try {
-              // Recupera o usuário logado do AsyncStorage
-      // const storedUser = AsyncStorage.getItem("user");
-      // if (!storedUser) return;
+    // const fetchPacienteInfo = async () => {
+    //   try {
+    //           // Recupera o usuário logado do AsyncStorage
+    //   const storedUser = AsyncStorage.getItem("user");
+    //   if (!storedUser) return;
 
-      // const { id: usu_id, psi_id } = JSON.parse(storedUser);
+    //   const { id: usu_id, pac_id } = JSON.parse(storedUser);
 
-      // const usu_id = 5 ;
-      // const pac_id = 19;
-      // Faz a requisição com o id do usuário logado
-      const usuarioResponse = await api.get(`/usuario/${usu_id}`);
-      const pacienteResponse = await api.get(`/paciente/${pac_id}`);
+    //   // const usu_id = 5 ;
+    //   // const pac_id = 19;
+    //   // Faz a requisição com o id do usuário logado
+    //   const usuarioResponse = await api.get(`/usuario/${usu_id}`);
+    //   const pacienteResponse = await api.get(`/paciente/${pac_id}`);
 
-      // Atualiza o estado com as informações combinadas do usuario e paciente
-      setPacienteInfo({
-        ...usuarioResponse.data.dados[0],
-        ...pacienteResponse.data.dados[0],
-      });
-      } catch (error) {
-        console.error("Erro ao buscar informações do paciente", error);
-      }
-    };
+    //   // Atualiza o estado com as informações combinadas do usuario e paciente
+    //   setPacienteInfo({
+    //     ...usuarioResponse.data.dados[0],
+    //     ...pacienteResponse.data.dados[0],
+    //   });
+    //   } catch (error) {
+    //     console.error("Erro ao buscar informações do paciente", error);
+    //     console.log(fetchPacienteInfo)
+    //   }
+    // };
 
     const loginPaciente = async (email, password) => {
       try {
           const response = await api.post('/usuarios/loginPaciente', {
-            // usu_email,
-            // usu_senha
             usu_email: email,
             usu_senha: password
           });
@@ -82,7 +81,7 @@ const UserProvider = ({ children }) => {
               
               await saveUserAsyncStorage(pacDados);
 
-              await fetchPacienteInfo();
+              // await fetchPacienteInfo();
               
               setError(null);
               return true;
@@ -97,7 +96,7 @@ const UserProvider = ({ children }) => {
         };
         
         return (
-  <UserContext.Provider value={{ pacienteInfo, fetchPacienteInfo, loginPaciente, error, logout}}>
+  <UserContext.Provider value={{ pacienteInfo,loginPaciente, error, logout}}>
       {children}
   </UserContext.Provider>
 )

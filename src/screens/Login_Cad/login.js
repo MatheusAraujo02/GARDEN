@@ -51,7 +51,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         <View style={styles.container}>
           <Text style={styles.cad}>Login</Text>
           <View style={styles.textForm}>
-            <TextInput style={styles.inpTex} placeholder="Nome de usuário" onChangeText={setLogin} placeholderTextColor={'#fff'} />
+            <TextInput style={[styles.inpTex, {marginBottom: 20}]} placeholder="Nome de usuário" onChangeText={setLogin} placeholderTextColor={'#fff'} />
             <View style={styles.olhoInput}>
               <TextInput placeholder="Senha" style={styles.inpTex} onChangeText={setSenha} placeholderTextColor={'#fff'} secureTextEntry={!isSenhaVisible} />
               <TouchableOpacity onPress={() => setIsSenhaVisible(!isSenhaVisible)}>
@@ -62,7 +62,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
           <MyButton title="ENTRAR" onClick={handleSubmit} />
 
-          <Text style={styles.links}>Esqueceu a senha?</Text>
+          {/* <Text style={styles.links}>Esqueceu a senha?</Text> */}
         </View>
       </ImageBackground>
     </View>

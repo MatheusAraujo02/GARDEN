@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
   container: {
-    marginTop: 70,
+    marginTop: 50,
     width: sizes.containerWidth,
     height: sizes.containerHeight,
     borderWidth: 1,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    marginTop: 15,
+    marginTop: 48,
     fontSize: sizes.titleFontSize,
     color: colors.white,
     textAlign: 'center',
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     // marginBottom: 10,
   },
   cad: {
+    marginTop: 40,
     fontSize: sizes.cadFontSize,
     color: colors.white,
     textAlign: 'center',
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
   },
   inpTex: {
     borderWidth: 1,
-    marginTop: 9,
+    marginTop: 10,
+    // marginBottom: 20,
     borderColor: colors.white,
     color: colors.white,
     fontSize: sizes.inputFontSize,

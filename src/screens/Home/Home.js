@@ -31,7 +31,7 @@ export default function Home({ navigation }) {
         >
           <Feather name='smile' style={{ backgroundColor: '#0E920A', borderRadius: 7, padding: 6, marginLeft: 26, fontSize: 30,}}/>  
         
-          <View style={{marginLeft: 15, }}>         
+          <View style={{marginLeft: 15}}>         
             <Text style={styles.titleEmocao}>Emoção</Text>
             <Text style={[styles.titleEmocao, {fontSize: 16}]}>Defina sua emoção</Text>          
           </View>
@@ -51,12 +51,12 @@ export default function Home({ navigation }) {
           <Image source={require('../../../assets/FloresAtividade.png')} style={{ justifyContent: 'flex-end', marginLeft: 'auto', height: '100%', borderTopRightRadius: 20, borderBottomRightRadius: 20}} />
         </Pressable>
 
-        <View style={styles.containerProxSessao}>
+        {/* <View style={styles.containerProxSessao}>
           <Text style={styles.titleProxSessao}>Proxima sessão</Text>
           <Ionicons name='calendar-outline' style={{ fontSize: 35, color: '#0E920A', position: 'absolute', marginLeft: 25}}/>
           <Text style={ styles.titleData }> {dia} - {hora} </Text>
           <Text style={ [styles.titleData, { marginLeft: '70%'} ] }> {dataNumero} </Text>       
-        </View>
+        </View> */}
     </View>
   );
 }

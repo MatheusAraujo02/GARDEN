@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
       // padding: 20, 
       borderRadius: 20,
       width: '90%',
-      height: '14%',
+      // height: '14%',
+      height: '15%',
       elevation: 3
     },
     titleEmocao: {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
       // padding: 20, 
       borderRadius: 20,
       width: '90%',
-      height: '14%',
+      height: '15%',
       elevation: 3
     },
     titleAtividades: {
