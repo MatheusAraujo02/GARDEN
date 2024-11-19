@@ -1,10 +1,12 @@
 import { View, StyleSheet, Image  } from "react-native";
 
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from "@react-navigation/drawer";
 import { Feather } from '@expo/vector-icons';
 
 import TabRoutes from "./tab.routes";
-import Config from "../screens/config/config";
+// import Config from "../screens/config/config";
+import { UserContext } from "../../contexts/userContext";
+import { useContext } from "react";
 
 const Drawer = createDrawerNavigator();
 
@@ -21,8 +23,41 @@ function CustomHeader() {
 }
 
 export default function DrawerRoutes() {
+    const { logout } = useContext(UserContext);
+
     return (
-        <Drawer.Navigator screenOptions={{
+        <Drawer.Navigator 
+        initialRouteName="Inicio"
+        drawerContent={(props) => {
+            return (
+                <View style={styles.drawerContainer}>
+                    <DrawerContentScrollView
+                        style={styles.scrollContainer}
+                        {...props}
+                        >
+                        <DrawerItemList {...props} />
+                    </DrawerContentScrollView>
+
+                <View style={styles.footerContainer}>
+                            <DrawerItem
+                                label="Sair"  
+                                onPress={logout}
+                                style={styles.customDrawerItem}
+                                labelStyle={styles.customDrawerLabel}
+                                icon={() => (
+                                    <Feather
+                                        name="log-out"
+                                        size={25}
+                                        color={'white'}
+                                    />
+                                )}
+                            />
+                </View>
+                </View>
+            )
+        }}
+
+        screenOptions={{
             drawerActiveTintColor: 'darkgreen', 
             drawerInactiveTintColor: 'grey',
             headerTitle: () => <CustomHeader />,
@@ -34,12 +69,19 @@ export default function DrawerRoutes() {
                 name='Inicio'
                 component={TabRoutes}
                 options={{
-                    drawerIcon: ({ focused, size,}) => <Feather name='home'  color={focused ? 'darkgreen' : 'grey' } size={ size }/>,
-                    drawerLabel: 'Início',
-            }}
+                    drawerIcon: ({ focused }) => ( 
+                        <Feather 
+                            name='home'  
+                            color={focused ? 'darkgreen' : 'grey' } 
+                            size={ 25 }
+                        />
+                    ),
+                        drawerLabel: 'Início',
+                        drawerLabelStyle: {fontWeight: 'bold'},
+                    }}
             
             />
-               <Drawer.Screen
+               {/* <Drawer.Screen
                 name='Config'
                 component={Config}
                 options={{
@@ -47,7 +89,7 @@ export default function DrawerRoutes() {
                     drawerLabel: 'Configurações',
             }}
             
-            />
+            /> */}
               {/* <Drawer.Screen
                 name='MeuPerfil'
                 component={}
@@ -61,16 +103,37 @@ export default function DrawerRoutes() {
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-      alignItems: 'center', // Centraliza a imagem
-      justifyContent: 'center',
-      height: 60, // Ajuste a altura conforme necessário
-  },
-  logo: {
-      // width: 150, // Ajuste a largura conforme necessário
-      // height: 40, // Ajuste a altura conforme necessário
-      width: 150,
-      height: 50,
-      
-  },
+    headerContainer: {
+        alignItems: 'center', // Centraliza a imagem
+        justifyContent: 'center',
+        height: 60, // Ajuste a altura conforme necessário
+    },
+    logo: {
+        width: 150,
+        height: 50,       
+    },
+    drawerContainer: {
+        flex: 1,
+        backgroundColor: '#f2f2f2'
+
+    },
+    scrollContainer: {
+        flex: 1,
+    },
+    footerContainer:{
+        borderTopWidth: 1,
+        borderTopColor: "#ccc",
+        paddingVertical: 10,
+        backgroundColor: "#f2f2f2",
+    },
+    customDrawerItem:{
+        backgroundColor: '#d32f2f',
+        marginHorizontal: 10,
+        marginVertical: 5
+    },
+    customDrawerLabel: {
+        color: 'white',
+        fontWeight: 'bold'
+    }
+
 });
