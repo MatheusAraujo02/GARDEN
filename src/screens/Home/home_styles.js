@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-      // marginLeft: 40,
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-evenly',
@@ -11,7 +10,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: '#233d2b',
-      // padding: 20, 
       borderRadius: 20,
       width: '90%',
       height: "26.3%",
@@ -21,16 +19,13 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 25,
       fontWeight: 'bold',
-      // marginLeft: 10,
     },
     containerEmocao: {
       flexDirection: 'row',
       backgroundColor: '#233d2b',
       alignItems: 'center',
-      // padding: 20, 
       borderRadius: 20,
       width: '90%',
-      // height: '14%',
       height: '15%',
       elevation: 3
     },
@@ -38,13 +33,11 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 22,
       fontWeight: 'bold',
-      // marginLeft: 10,
     },
     containerAtividades: {
       flexDirection: 'row',
       backgroundColor: '#233d2b',
       alignItems: 'center',
-      // padding: 20, 
       borderRadius: 20,
       width: '90%',
       height: '15%',
@@ -54,13 +47,11 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 22,
       fontWeight: 'bold',
-      // marginLeft: 10,
     },
     containerProxSessao: {
       flexDirection: 'row',
       backgroundColor: '#d9d9d9',
       alignItems: 'center',
-      // padding: 20, 
       borderRadius: 20,
       width: '90%',
       height: '14%',

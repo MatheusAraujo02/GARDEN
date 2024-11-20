@@ -113,8 +113,6 @@ const styles = StyleSheet.create({
     image: {
       width: Dimensions.get('window').width / 5.2,
       height: Dimensions.get('window').height / 12, 
-      // marginBottom: '-50%',
-      // marginTop:'-15%'
   },
   title: {
 
@@ -123,11 +121,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  // pressable:{
-  //   backgroundColor: 'darkgreen',
-  //   padding: 10,
-  //   borderRadius: 5,
-  //   alignItems: 'center',
-  //   width: '90%'
-  // },
 });

@@ -4,10 +4,6 @@ import styles from './home_styles';
 
 import { Ionicons, Feather} from '@expo/vector-icons';
 
-const dia = 'Quinta-feira';
-const hora = '19:47';
-const dataNumero=  '03/09/2024';
-
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
@@ -50,20 +46,9 @@ export default function Home({ navigation }) {
           </View>
           <Image source={require('../../../assets/FloresAtividade.png')} style={{ justifyContent: 'flex-end', marginLeft: 'auto', height: '100%', borderTopRightRadius: 20, borderBottomRightRadius: 20}} />
         </Pressable>
-
-        {/* <View style={styles.containerProxSessao}>
-          <Text style={styles.titleProxSessao}>Proxima sessão</Text>
-          <Ionicons name='calendar-outline' style={{ fontSize: 35, color: '#0E920A', position: 'absolute', marginLeft: 25}}/>
-          <Text style={ styles.titleData }> {dia} - {hora} </Text>
-          <Text style={ [styles.titleData, { marginLeft: '70%'} ] }> {dataNumero} </Text>       
-        </View> */}
     </View>
   );
 }
 
-/* o padding do container estava fazendo a imagem nao chegar no final do container principal que é o retangulo verde escuro. 
-Tirando ele e mexendo somendo no marginLeft do titulo e do emoticon deu pra fazer ela ficar no lugar certo
-só falta testar em outros dispositivos 
-  
-*/
+
 

@@ -6,16 +6,11 @@ import Home from '../screens/Home/Home';
 import Diario from '../screens/Diario/Diario';
 import Emocao from '../screens/Emocao/Emocao';
 import Atividades from '../screens/Atividades/atividades';
-// import { useAtividades } from '../screens/Atividades/atividades_context';
 
 const Tab = createBottomTabNavigator();
 
 
 export default function TabRoutes() {
-    // const { atividadesLidas } = useAtividades();
-
-    // const atividadesNaoLidas = Object.values(atividadesLidas || {}).filter((lida) => !lida).length;
-   
     return (
         <Tab.Navigator screenOptions={ {
             headerShown: false,
@@ -64,4 +59,3 @@ export default function TabRoutes() {
     )
 }
 
-// parei aqui tentando colocar cor no texto dos botoes

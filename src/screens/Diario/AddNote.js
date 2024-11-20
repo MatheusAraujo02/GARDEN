@@ -84,7 +84,3 @@ const styles = StyleSheet.create({
 });
 
 export default AddNote;
-
-  // const handleSave = () => {
-  //     navigation.goBack(); // Voltar para a lista de notas
-  // };

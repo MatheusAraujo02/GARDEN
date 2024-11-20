@@ -1,9 +1,7 @@
 import { useState, useEffect} from 'react';
 import { View, Text, FlatList, Pressable } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-// import { useAtividades } from './atividades_context';
 
-// import { atividades } from '../../components/mocks/dados';
 import styles from './atividades_styles';
 import Detalhes from './detalhesAtv';
 import api from '../../services/api';
@@ -22,9 +20,8 @@ export default function Atividades() {
 }
     
     const ListarAtividades =({ navigation }) => {
+    const [atividades, setAtividades] = useState([]);
 
-      const [atividades, setAtividades] = useState([]);
-    // const { inicializarAtividades } = useAtividades();
 
     useEffect(() => {
       async function Atividades(){
@@ -32,7 +29,6 @@ export default function Atividades() {
           const response = await api.get("/atividade");
 
           setAtividades(response.data.dados);
-          // inicializarAtividades(response.data.dados);
         } catch (error) {
           console.error("erro ao buscar atividade:", error);
           setAtividades([]);
@@ -60,46 +56,4 @@ export default function Atividades() {
         )
       };
       
-  // useEffect(() => {
-  //     const atividadeMock = [
-  //         { ati_id: 1, ati_data: new Date().toLocaleString(), ati_descricao: 'Teste, esta é a atividade 1', },
-  //         { ati_id: 2 , ati_data: new Date().toLocaleString(), ati_descricao: 'Teste, esta é a atividade 2', },
-  //     ];
-      
-  //     setAtividades(atividadeMock);
-
-// import { useNavigation } from '@react-navigation/native';
-// 
-//     const navigation = useNavigation();
-
-//     useEffect(() => {
-//         const atividadeMock = [ 
-//             //Simulação da API
-//             { id: '1', title: 'Atividade 1', content: 'Conteúdo completo da Atividade 1' },
-//             { id: '2', title: 'Atividade 2', content: 'Conteúdo completo da Atividade 2' },
-//         ];
-//         setAtividades(atividadeMock);
-//     }, []);
-
-//     const renderAtividade = ({ item }) => (
-//         <Pressable 
-//         onPress={() => navigation.navigate('Detalhes', { atividade: item})}>
-//             <Text> {item.title} </Text>
-//         </Pressable>
-//     );
-//     return (
-//         <View>
-//             <FlatList 
-//              data={atividades}
-//              renderItem={renderAtividade}
-//              keyExtractor={(item) => item.id}
-//             />
-//         </View>
-//     )
-// }
-    
-// const atvNavigation = () => {
-//     return (
-      
-//     )    
-// };
+ 
