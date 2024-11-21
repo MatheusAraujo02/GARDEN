@@ -41,7 +41,7 @@ import { UserContext  } from '../../../contexts/userContext';
         <View style={styles.container}>
           <Text style={styles.cad}>Login</Text>
           <View style={styles.textForm}>
-            <TextInput style={[styles.inpTex, {marginBottom: 20}]} placeholder="Nome de usuário" onChangeText={setLogin} placeholderTextColor={'#fff'} />
+            <TextInput style={[styles.inpTex, {marginBottom: 20}]} placeholder="Email" onChangeText={setLogin} placeholderTextColor={'#fff'} />
             <View style={styles.olhoInput}>
               <TextInput placeholder="Senha" style={styles.inpTex} onChangeText={setSenha} placeholderTextColor={'#fff'} secureTextEntry={!isSenhaVisible} />
               <TouchableOpacity onPress={() => setIsSenhaVisible(!isSenhaVisible)}>
