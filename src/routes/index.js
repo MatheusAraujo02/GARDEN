@@ -9,6 +9,7 @@ const Stack = createStackNavigator();
 
 export default function Routes() {
   const { pacienteInfo } = useContext(UserContext);
+
   return ( 
     <Stack.Navigator>
       {pacienteInfo ? (

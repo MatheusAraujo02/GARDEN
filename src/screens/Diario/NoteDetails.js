@@ -5,10 +5,10 @@ const NoteDetails = ({ route }) => {
 
   return (
     <ScrollView style={{  flexGrow: 1}}>
-    <View style={styles.container}>
-      <Text style={styles.dateText}>{new Date(note.dia_data).toLocaleDateString('pt-BR')}</Text>
-      <Text style={styles.noteText}>{note.dia_relato}</Text>
-    </View>
+      <View style={styles.container}>
+        <Text style={styles.dateText}>{new Date(note.dia_data).toLocaleDateString('pt-BR')}</Text>
+        <Text style={styles.noteText}>{note.dia_relato}</Text>
+      </View>
     </ScrollView>
   );
 };

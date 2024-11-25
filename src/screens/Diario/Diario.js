@@ -7,12 +7,9 @@ import { useContext } from 'react'
 
 import NoteDetails from './NoteDetails';
 import AddNote from './AddNote';
-
 import styles from './diario_styles';
 
-
 const Stack = createStackNavigator();
-
 
 export default function Diario() {
 

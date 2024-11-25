@@ -4,7 +4,6 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
 import { Feather } from '@expo/vector-icons';
 
 import TabRoutes from "./tab.routes";
-// import Config from "../screens/config/config";
 import { UserContext } from "../../contexts/userContext";
 import { useContext } from "react";
 
@@ -81,23 +80,6 @@ export default function DrawerRoutes() {
                     }}
             
             />
-               {/* <Drawer.Screen
-                name='Config'
-                component={Config}
-                options={{
-                    drawerIcon: ({ focused, size,}) => <Feather name='settings'  color={focused ? 'darkgreen' : 'grey' } size={ size }/>,
-                    drawerLabel: 'Configurações',
-            }}
-            
-            /> */}
-              {/* <Drawer.Screen
-                name='MeuPerfil'
-                component={}
-                options={{
-                    drawerIcon: ({ focused, size,}) => <Feather name='settings'  color={focused ? 'darkgreen' : 'grey' } size={ size }/>,
-                    drawerLabel: 'Meu Perfil',
-                }}
-            /> */}
         </Drawer.Navigator>
     )
 }
