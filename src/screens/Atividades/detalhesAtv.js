@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable} from 'react-native';
+import { View, Text, StyleSheet, ScrollView} from 'react-native';
 
 
  const Detalhes = ({ route }) => {
@@ -6,9 +6,11 @@ import { View, Text, StyleSheet, Pressable} from 'react-native';
 
 
     return (
+      <ScrollView style={{  flexGrow: 1}}>
       <View style={styles.container}>
         <Text style={styles.text}>{atividade.ati_descricao}</Text>  
       </View>
+      </ScrollView>
     );
 
 }

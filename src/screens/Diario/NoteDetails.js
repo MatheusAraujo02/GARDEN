@@ -14,8 +14,7 @@ const NoteDetails = ({ route }) => {
         navigation.goBack()
       } 
     } catch (error) {
-      console.error("erro ao buscar atividade:", error);
-      setAtividades([]);
+      console.error("erro ao apagar diario:", error);
     }
   }
 
@@ -35,14 +34,13 @@ const NoteDetails = ({ route }) => {
           fontWeight: 'bold',
           color: 'white',
           alignContent: 'center',
-        }}> Apagar</Text>
+        }}>Apagar</Text>
       </Pressable>
       <View style={styles.container} >
         <Text style={styles.dateText}>{new Date(note.dia_data).toLocaleDateString('pt-BR')}</Text>
         <Text style={styles.noteText}>{note.dia_relato}</Text>
       </View>
     </ScrollView>
-    
   );
 };
 
