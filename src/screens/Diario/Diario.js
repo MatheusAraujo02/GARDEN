@@ -23,9 +23,8 @@ export default function Diario() {
 
 }
 
-const ListaDeNotas = ({ navigation }) => {
+const ListaDeNotas = ({ navigation }) => { 
   const [notes, setNotes] = useState([]);
-
   const { pacienteInfo } = useContext(UserContext);
 
   useEffect(() => {
@@ -41,6 +40,16 @@ const ListaDeNotas = ({ navigation }) => {
       }
       Notas();}
   })
+
+  const formatarDescricao = (descricao) => {
+    // Garante que a descrição exista
+    if (!descricao) return "";
+  
+    // Verifica se o texto já termina com um ponto final e adiciona caso necessário
+    const textoFormatado = descricao.trim();
+    return textoFormatado.endsWith(".") ? textoFormatado : `${textoFormatado}.`;
+  };
+  
   return (
     <View style={styles.container}>
       <FlatList
@@ -52,7 +61,12 @@ const ListaDeNotas = ({ navigation }) => {
             onPress={() => navigation.navigate('NoteDetails', { note: item })}
           >
             <Text style={styles.noteDate}>{new Date(item.dia_data).toLocaleDateString('pt-BR')}</Text>
-            <Text style={styles.noteText}>{item.dia_relato.slice(0, 30)}...</Text>
+            <Text 
+              style={styles.noteText}
+              numberOfLines={1}
+              ellipsizeMode='tail'
+            >
+              {formatarDescricao(item.dia_relato)}</Text>
           </Pressable>
         )}
       />

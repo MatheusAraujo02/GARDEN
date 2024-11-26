@@ -63,7 +63,7 @@ const UserProvider = ({ children }) => {
         };
         
         return (
-  <UserContext.Provider value={{ pacienteInfo,loginPaciente, error, logout}}>
+  <UserContext.Provider value={{ pacienteInfo, loginPaciente, error, logout}}>
       {children}
   </UserContext.Provider>
 )
