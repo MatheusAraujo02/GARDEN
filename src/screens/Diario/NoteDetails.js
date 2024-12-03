@@ -22,10 +22,11 @@ const NoteDetails = ({ route }) => {
     <ScrollView style={{  flexGrow: 1}}>
       <Pressable
       style={{
+        marginLeft: 5 ,
         backgroundColor: 'darkred',
         padding: 5,
         borderRadius: 5,
-        width: 50,
+        width: 58,
         height: 35,
       }}
       onPress={() => apagarDiario()}>
@@ -33,8 +34,9 @@ const NoteDetails = ({ route }) => {
          style={{
           fontWeight: 'bold',
           color: 'white',
-          alignContent: 'center',
-        }}>Apagar</Text>
+          textAlign: 'center',
+          marginTop: 3.5
+        }}>Apagar </Text>
       </Pressable>
       <View style={styles.container} >
         <Text style={styles.dateText}>{new Date(note.dia_data).toLocaleDateString('pt-BR')}</Text>

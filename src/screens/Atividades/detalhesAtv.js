@@ -8,7 +8,7 @@ import { View, Text, StyleSheet, ScrollView} from 'react-native';
     return (
       <ScrollView style={{  flexGrow: 1}}>
       <View style={styles.container}>
-        <Text style={styles.text}>{atividade.ati_descricao}</Text>  
+        <Text style={styles.text} selectable >{atividade.ati_descricao}</Text>  
       </View>
       </ScrollView>
     );
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgroundColor: '#fff',
       },
       title: {
         fontSize: 24,
